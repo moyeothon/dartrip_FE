@@ -136,7 +136,7 @@ const KeywordSelectionPage = () => {
       </div>
 
       <button
-        onClick={ handleKeywordClick}
+        onClick={ handleClick}
         style={{
           marginTop: '20px',
           padding: '10px 20px',
