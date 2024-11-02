@@ -4,14 +4,8 @@ import useStore from "../store/useStore";
 import { useNavigate } from "react-router-dom";
 
 const KeywordSelectionPage = () => {
-  const {
-    teamName,
-    keywords,
-    day,
-    setTeamName,
-    setKeywords,
-    setDay,
-  } = useStore();
+  const { teamName, keywords, day, setTeamName, setKeywords, setDay } =
+    useStore();
 
   const [displayedKeywords, setDisplayedKeywords] = useState([]);
   const navigate = useNavigate();
@@ -96,29 +90,27 @@ const KeywordSelectionPage = () => {
     navigate("/map");
   };
 
-
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
       <h2>팀명과 키워드를 선택하세요</h2>
-      
-      <div style={{ marginTop: '20px', width: '94%', maxWidth: '410px' }}>
+
+      <div style={{ marginTop: "20px", width: "94%", maxWidth: "410px" }}>
         <h3>팀명:</h3>
         <input
           type="text"
           value={teamName}
           onChange={(e) => setTeamName(e.target.value)}
           placeholder="팀명을 입력하세요"
-          style={{ width: '100%', padding: '10px', borderRadius: '5px' }}
-
+          style={{ width: "100%", padding: "10px", borderRadius: "5px" }}
         />
       </div>
 
-      <div style={{ marginTop: '20px', width: '100%', maxWidth: '410px' }}>
+      <div style={{ marginTop: "20px", width: "100%", maxWidth: "410px" }}>
         <h3>여행 일정 선택:</h3>
         <select
           value={day}
           onChange={(e) => setDay(e.target.value)}
-          style={{ width: '100%', padding: '10px', borderRadius: '5px' }}
+          style={{ width: "100%", padding: "10px", borderRadius: "5px" }}
         >
           <option value="">날짜를 선택하세요</option>
           <option value="1">당일치기</option>
