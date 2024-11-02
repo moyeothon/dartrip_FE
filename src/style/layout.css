@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 430px; /* 최대 가로 길이 설정을 430px로 변경 */
+  margin: 0 auto; /* 중앙 정렬 */
+}
+
+.header {
+  background-color: #4caf50;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.nav {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.footer {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
