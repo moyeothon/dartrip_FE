@@ -6,7 +6,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { FaSyncAlt } from 'react-icons/fa';
-import useStore from '../store/useStore'; // store 파일의 실제 경로로 변경하세요.
+import useStore from '../store/useStore';
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const KeywordSelectionPage = () => {
   const {
@@ -44,6 +48,12 @@ const KeywordSelectionPage = () => {
   const handleKeywordClick = (keyword) => {
     setKeywords(keyword);
   };
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/map"); // "/destination" 경로로 이동
+  }; // store 파일의 실제 경로로 변경하세요.
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
@@ -126,7 +136,7 @@ const KeywordSelectionPage = () => {
       </div>
 
       <button
-        onClick={() => alert(`팀명: ${teamName}\n선택된 키워드: ${keywords.join(', ')}`)}
+        onClick={ handleKeywordClick}
         style={{
           marginTop: '20px',
           padding: '10px 20px',
@@ -138,7 +148,7 @@ const KeywordSelectionPage = () => {
           width: '100%',
         }}
       >
-        제출
+        다음
       </button>
     </div>
   );
