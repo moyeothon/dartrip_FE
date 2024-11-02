@@ -8,8 +8,15 @@
   position: relative;
   width: 300px;
   height: auto;
+  background-color: #e1fefc;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  margin-top: 20px;
 }
-
+.text {
+  color: #517f53;
+}
 .map-container {
   position: relative;
   display: flex;

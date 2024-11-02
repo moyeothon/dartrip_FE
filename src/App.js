@@ -1,23 +1,24 @@
 import React from "react";
 import Layout from "./common/Layout";
 import Result from "./pages/Result";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import SelectMapPage from "./pages/SelectMapPage";
-
 import Keyword from "./pages/keyword";
+import Home from "./pages/Home";
+import Map from "./pages/SelectMapPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Layout>
-      <Router>
+    <Router>
+      <Layout>
         <Routes>
-          <Route path="/" element={<h1>홈페이지</h1>} /> {/* 기본 경로 */}
+          <Route path="/" element={<Home />} />{" "}
+          {/* 기본 경로에 Home 컴포넌트 추가 */}
           <Route path="/result" element={<Result />} />
-          <Route path="/map" element={<SelectMapPage />} />
           <Route path="/keyword" element={<Keyword />} />
+          <Route path="/map" element={<Map />} />
         </Routes>
-      </Router>
-    </Layout>
+      </Layout>
+    </Router>
   );
 }
 
