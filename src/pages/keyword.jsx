@@ -9,18 +9,18 @@ import { FaSyncAlt } from 'react-icons/fa';
 import useStore from '../store/useStore';
 import { useNavigate } from "react-router-dom";
 
-
-
-
 const KeywordSelectionPage = () => {
   const {
     teamName,
     keywords,
+    day,
     setTeamName,
     setKeywords,
+    setDay,
   } = useStore();
 
   const [displayedKeywords, setDisplayedKeywords] = useState([]);
+  const navigate = useNavigate();
 
   const allKeywords = [
     "스파 & 마사지", "명상 리트릿", "온천 체험", "요가 클래스", "자연 속 걷기", "조용한 해변",
@@ -49,15 +49,14 @@ const KeywordSelectionPage = () => {
     setKeywords(keyword);
   };
 
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate("/map"); // "/destination" 경로로 이동
-  }; // store 파일의 실제 경로로 변경하세요.
+  const handleNavigate = () => {
+    navigate("/map");
+  };
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
       <h2>팀명과 키워드를 선택하세요</h2>
+      
       <label>
         팀명:
         <input
@@ -68,6 +67,24 @@ const KeywordSelectionPage = () => {
           style={{ marginLeft: '10px', padding: '5px', width: '100%' }}
         />
       </label>
+
+      <div style={{ marginTop: '20px' }}>
+        <h3>여행 일정 선택:</h3>
+        <select
+          value={day}
+          onChange={(e) => setDay(e.target.value)}
+          style={{ width: '100%', padding: '10px', borderRadius: '5px', marginTop: '10px' }}
+        >
+          <option value="">날짜를 선택하세요</option>
+          <option value="1">당일치기</option>
+          <option value="2">1박2일</option>
+          <option value="3">2박3일</option>
+          <option value="4">3박4일</option>
+          <option value="5">4박5일</option>
+          <option value="6">5박6일</option>
+          <option value="7">6박7일</option>
+        </select>
+      </div>
 
       <div style={{ marginTop: '20px' }}>
         <h3>키워드 선택:</h3>
@@ -136,7 +153,7 @@ const KeywordSelectionPage = () => {
       </div>
 
       <button
-        onClick={ handleClick}
+        onClick={handleNavigate}
         style={{
           marginTop: '20px',
           padding: '10px 20px',
@@ -155,6 +172,7 @@ const KeywordSelectionPage = () => {
 };
 
 export default KeywordSelectionPage;
+
 
 
 
