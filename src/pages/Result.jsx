@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../common/Layout";
 import useStore from "../store/useStore";
+import "../style/result.css";
+
 export default function Result() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const { teamName, setTeamName } = useStore();
+  const { teamName, keywords, place } = useStore();
+
+  const [postKeywords, setPostKeyWords] = useState();
+
+  useEffect(() => {
+    const newKeywords = keywords.map((keyword) => keyword);
+    setPostKeyWords(newKeywords);
+  }, [keywords]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,13 +26,15 @@ export default function Result() {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${process.env.REACT_APP_GPT_API_KEY}`,
-              // "OpenAI-Organization": "org-joUIKhObOcdR6tsnZc9CpsRA",
-              // "OpenAI-Project": "proj_DbERCYDaMi9gbzSjxHzrCKIF", // 프로젝트 ID
             },
             body: JSON.stringify({
               model: "gpt-4o-mini",
               messages: [
-                { role: "user", content: "등산을 할 수 있는 여행지 추천해줘" },
+                {
+                  role: "user",
+                  content: `여행지는 ${place}쪽이고 ${keywords}키워드는 day일 다녀올 예정이야 여행지를 1개만 추천해줄래 ? 숫자는 안붙혀도 되고 내가 포맷팅할려고하는데 그냥 장소/1일차/2일차/.../n일차  순으로 해줘 나한테 가독성 있게 보여줄일은 없고 장소/1일차/2일차3일차/.../ 으로만 해줘 split(['/'])으로 표현할수 있게 예를들어 양양/점심은 ~~을 먹고 저녁은 ~~로 마무리합니다./아침에 ~~을 방문해 좋은 추억을 남깁니다. 1일차 앞에 빼고 ~~다 로 마무리해줘 식으로  
+`,
+                },
               ],
               temperature: 0.5,
               max_tokens: 200,
@@ -45,7 +55,7 @@ export default function Result() {
       }
     };
 
-    // fetchData();
+    fetchData();
   }, []); // 컴포넌트가 마운트될 때만 실행
 
   // if (loading) {
@@ -55,14 +65,36 @@ export default function Result() {
   // if (error) {
   //   return <p>오류: {error}</p>;
   // }
-  const message =
-    "등산을 즐길 수 있는 여행지는 여러 곳이 있습니다. 아래는 한국과 해외에서 추천할 만한 등산지입니다.\n\n### 한국\n1. **한라산 (제주도)**: 제주도의 상징적인 산으로, 정상에서의 경치가 일품입니다. 다양한 코스가 있어 난이도에 따라 선택할 수 있습니다.\n2. **설악산 (강원도)**: 아름다운 경치와 다양한 등산 코스로 유명합니다. 특히 가을 단풍 시즌에 많은 사람들이 찾습니다.\n3. **지리산 (전라북도, 경상남도)**: 한국에서 가장 높은 산 중 하나로, 다양한 트레킹 코스가 있어 여러 날 동안의 도보 여행이 가능합니다.\n4. **북한산 (서울)**: 서울 근처에 위치해 있어 접근성이 좋고, 다양한 난이도의 코스가 있습니다. 서울의 전경을 감상할 수 있는";
 
   return (
     <div>
-      <h1>결과</h1>
+      <div className="topWrapper">
+        <div>{teamName}은 </div>
+        <div>{keywords}</div>
+        <div>{place} 으로 갑니다.</div>
+      </div>
+      <div className="resultWrppaer">
+        <p className="title">
+          {result && result.choices[0].message.content.split("/")[0]}
+        </p>
+        <div className="reasonWrapper">
+          {result &&
+            result.choices[0].message.content
+              .split("/")
+              .slice(1)
+              .map((v, index) => (
+                <div className="dayWrapper">
+                  <p className="day" key={`day_${index}`}>
+                    {index + 1} 일차
+                  </p>
+                  <p className="course" key={`content_${index}`}>
+                    {v}
+                  </p>
+                </div>
+              ))}
+        </div>
+      </div>
 
-      {/* <p>{result.choices[0].message.content}</p>{" "} */}
       {/* API 응답에서 콘텐츠 표시 */}
     </div>
   );

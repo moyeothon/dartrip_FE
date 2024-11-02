@@ -1,0 +1,31 @@
+.topWrapper {
+  display: flex; /* 또는 block으로 변경 가능 */
+  flex-direction: row; /* 수직 정렬 */
+}
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.reasonWrapper {
+  /* background-color: aliceblue; */
+}
+
+.reason {
+  font-size: 18px;
+}
+.dayWrapper {
+  background-color: #cef1c5;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  padding: 8px;
+}
+.day {
+  font-size: 18px;
+  font-weight: 600;
+}
+.course {
+  padding-top: 4px;
+
+  padding-bottom: 4px;
+}
