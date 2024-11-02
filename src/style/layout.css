@@ -1,40 +1,28 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 .mobile-layout {
+  background-color: #FFFFFF; /* 배경색을 흰색으로 설정 */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  max-width: 430px; /* 최대 가로 길이 설정을 430px로 변경 */
-  margin: 0 auto; /* 중앙 정렬 */
+  align-items: center;
 }
 
 .header {
-  background-color: #4caf50;
-  color: white;
-  padding: 15px;
-  text-align: center;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFFFF; /* 헤더의 배경도 흰색으로 설정 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.nav {
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  text-align: center;
+.logo {
+  height: 50px; /* 로고 크기 조절 */
 }
 
 .content {
-  flex: 1;
+  width: 100%;
   padding: 20px;
-  background-color: #f4f4f4;
+  flex: 1;
 }
 
-.footer {
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}

@@ -1,18 +1,20 @@
-// export default function Keyword  ()  {
-//     return(
-
-//     )
-// }
-
 import React, { useEffect, useState } from "react";
 import { FaSyncAlt } from "react-icons/fa";
 import useStore from "../store/useStore";
 import { useNavigate } from "react-router-dom";
 
 const KeywordSelectionPage = () => {
-  const { teamName, keywords, setTeamName, setKeywords } = useStore();
+  const {
+    teamName,
+    keywords,
+    day,
+    setTeamName,
+    setKeywords,
+    setDay,
+  } = useStore();
 
   const [displayedKeywords, setDisplayedKeywords] = useState([]);
+  const navigate = useNavigate();
 
   const allKeywords = [
     "스파 & 마사지",
@@ -90,25 +92,44 @@ const KeywordSelectionPage = () => {
     setKeywords(keyword);
   };
 
-  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/map");
+  };
 
-  const handleClick = () => {
-    navigate("/result"); // "/destination" 경로로 이동
-  }; // store 파일의 실제 경로로 변경하세요.
 
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
       <h2>팀명과 키워드를 선택하세요</h2>
-      <label>
-        팀명:
+      
+      <div style={{ marginTop: '20px', width: '94%', maxWidth: '410px' }}>
+        <h3>팀명:</h3>
         <input
           type="text"
           value={teamName}
           onChange={(e) => setTeamName(e.target.value)}
           placeholder="팀명을 입력하세요"
-          style={{ marginLeft: "10px", padding: "5px", width: "100%" }}
+          style={{ width: '100%', padding: '10px', borderRadius: '5px' }}
+
         />
-      </label>
+      </div>
+
+      <div style={{ marginTop: '20px', width: '100%', maxWidth: '410px' }}>
+        <h3>여행 일정 선택:</h3>
+        <select
+          value={day}
+          onChange={(e) => setDay(e.target.value)}
+          style={{ width: '100%', padding: '10px', borderRadius: '5px' }}
+        >
+          <option value="">날짜를 선택하세요</option>
+          <option value="1">당일치기</option>
+          <option value="2">1박2일</option>
+          <option value="3">2박3일</option>
+          <option value="4">3박4일</option>
+          <option value="5">4박5일</option>
+          <option value="6">5박6일</option>
+          <option value="7">6박7일</option>
+        </select>
+      </div>
 
       <div style={{ marginTop: "20px" }}>
         <h3>키워드 선택:</h3>
@@ -181,7 +202,7 @@ const KeywordSelectionPage = () => {
       </div>
 
       <button
-        onClick={handleClick}
+        onClick={handleNavigate}
         style={{
           marginTop: "20px",
           padding: "10px 20px",
