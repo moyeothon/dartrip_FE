@@ -28,11 +28,11 @@ export default function Result() {
               Authorization: `Bearer ${process.env.REACT_APP_GPT_API_KEY}`,
             },
             body: JSON.stringify({
-              model: "gpt-4o-mini",
+              model: "gpt-4-turbo",
               messages: [
                 {
                   role: "user",
-                  content: `여행지는 ${place}쪽이고 ${keywords}키워드는 day일 다녀올 예정이야 여행지를 1개만 추천해줄래 ? 숫자는 안붙혀도 되고 내가 포맷팅할려고하는데 그냥 장소/1일차/2일차/.../n일차  순으로 해줘 나한테 가독성 있게 보여줄일은 없고 장소/1일차/2일차3일차/.../ 으로만 해줘 split(['/'])으로 표현할수 있게 예를들어 양양/점심은 ~~을 먹고 저녁은 ~~로 마무리합니다./아침에 ~~을 방문해 좋은 추억을 남깁니다. 1일차 앞에 빼고 ~~다 로 마무리해줘 식으로  
+                  content: `여행지는 ${place}쪽이고 ${postKeywords}키워드는 day일 다녀올 예정이야  여행지를 1개만 추천해줄래 ? 나는 split 사용해서 인덱스 별로 사용자들에게 보여줄거야 그러니까 다른 접두어 빼고 여행지이름/1일차코스/2일차코스 식으로 설명해줘 / ~ / 안에는 1일 코스가 있어야돼
 `,
                 },
               ],
@@ -55,8 +55,8 @@ export default function Result() {
       }
     };
 
-    fetchData();
-  }, []); // 컴포넌트가 마운트될 때만 실행
+    postKeywords && fetchData();
+  }, [postKeywords]); // 컴포넌트가 마운트될 때만 실행
 
   // if (loading) {
   //   return <p>로딩 중...</p>;
@@ -65,13 +65,38 @@ export default function Result() {
   // if (error) {
   //   return <p>오류: {error}</p>;
   // }
-
+  console.log(keywords);
   return (
     <div>
       <div className="topWrapper">
-        <div>{teamName}은 </div>
-        <div>{keywords}</div>
-        <div>{place} 으로 갑니다.</div>
+        <div className="teamNameWrapper">
+          <p className="teamName">'{teamName}' </p>는
+        </div>
+        <div className="keywordWrapper">
+          {keywords.length > 0 ? (
+            keywords.map((keyword) => (
+              <span
+                key={keyword}
+                style={{
+                  padding: "10px 20px",
+                  cursor: "pointer",
+
+                  backgroundColor: "#b3dca9",
+                  borderRadius: "5px",
+                }}
+              >
+                {keyword}
+              </span>
+            ))
+          ) : (
+            <></>
+          )}
+          을 주제로
+        </div>
+        <div style={{ display: "flex" }}>
+          <p className="teamName">{place}</p>
+          으로 갑니다.
+        </div>
       </div>
       <div className="resultWrppaer">
         <p className="title">

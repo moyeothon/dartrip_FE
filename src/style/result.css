@@ -1,11 +1,17 @@
 .topWrapper {
   display: flex; /* 또는 block으로 변경 가능 */
-  flex-direction: row; /* 수직 정렬 */
+  flex-direction: column; /* 수직 정렬 */
+  gap: 4px;
+  margin-bottom: 20px;
 }
 .title {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 8px;
+}
+.teamName {
+  font-size: 20px;
+  font-weight: 600;
 }
 .reasonWrapper {
   /* background-color: aliceblue; */
@@ -15,7 +21,7 @@
   font-size: 18px;
 }
 .dayWrapper {
-  background-color: #cef1c5;
+  background-color: #b3dca9;
   margin-bottom: 8px;
   border-radius: 12px;
   padding: 8px;
@@ -28,4 +34,16 @@
   padding-top: 4px;
 
   padding-bottom: 4px;
+}
+.keywordWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.teamNameWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
 }

@@ -114,13 +114,13 @@ const KeywordSelectionPage = () => {
         <h3>키워드 선택:</h3>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
           {displayedKeywords.map((keyword) => (
-            <button
+            <span
               key={keyword}
               onClick={() => handleKeywordClick(keyword)}
               style={{
                 padding: "10px 20px",
                 backgroundColor: keywords.includes(keyword)
-                  ? "#4CAF50"
+                  ? "#b3dca9"
                   : "#f0f0f0",
                 border: "none",
                 borderRadius: "5px",
@@ -128,7 +128,7 @@ const KeywordSelectionPage = () => {
               }}
             >
               {keyword}
-            </button>
+            </span>
           ))}
         </div>
       </div>
@@ -161,11 +161,13 @@ const KeywordSelectionPage = () => {
           {keywords.length > 0 ? (
             keywords.map((keyword) => (
               <span
+                onClick={() => handleKeywordClick(keyword)}
                 key={keyword}
                 style={{
-                  padding: "5px 10px",
-                  backgroundColor: "#e0f7fa",
-                  border: "1px solid #4CAF50",
+                  padding: "10px 20px",
+                  cursor: "pointer",
+
+                  backgroundColor: "#b3dca9",
                   borderRadius: "5px",
                 }}
               >
