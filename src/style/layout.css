@@ -7,7 +7,7 @@
 .mobile-layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 95px);
   max-width: 430px; /* 최대 가로 길이 설정을 430px로 변경 */
   margin: 0 auto; /* 중앙 정렬 */
 }
