@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../image/IMG_8791.PNG"; // 로고 이미지 파일 경로를 실제 위치로 변경하세요.
+import logo from "../image/IMG_8791.PNG"; // 로고 이미지 파일 경로를 실제 위치로 변경하세요.
 import "../style/layout.css";
 
 const Layout = ({ children }) => {
@@ -16,4 +16,3 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
-

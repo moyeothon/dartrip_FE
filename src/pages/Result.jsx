@@ -7,7 +7,7 @@ export default function Result() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { teamName, keywords, place } = useStore();
+  const { teamName, keywords, place, day } = useStore();
 
   const [postKeywords, setPostKeyWords] = useState();
 
@@ -32,7 +32,7 @@ export default function Result() {
               messages: [
                 {
                   role: "user",
-                  content: `여행지는 ${place}쪽이고 ${postKeywords}키워드는 day일 다녀올 예정이야  여행지를 1개만 추천해줄래 ? 나는 split 사용해서 인덱스 별로 사용자들에게 보여줄거야 그러니까 다른 접두어 빼고 여행지이름/1일차코스/2일차코스 식으로 설명해줘 / ~ / 안에는 1일 코스가 있어야돼
+                  content: `여행지는 ${place}쪽이고 ${postKeywords}키워드는 ${day}일 다녀올 예정이야  여행지를 1개만 추천해줄래 ? 나는 split 사용해서 인덱스 별로 사용자들에게 보여줄거야 그러니까 다른 접두어 빼고 여행지이름/1일차코스/2일차코스 식으로 설명해줘 / ~ / 안에는 1일 코스가 있어야돼
 `,
                 },
               ],
@@ -93,9 +93,8 @@ export default function Result() {
           )}
           을 주제로
         </div>
-        <div style={{ display: "flex" }}>
-          <p className="teamName">{place}</p>
-          으로 갑니다.
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <p className="teamName">{place}</p> 으로 <p>{day}일</p> 갑니다.
         </div>
       </div>
       <div className="resultWrppaer">
