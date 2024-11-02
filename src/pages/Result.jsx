@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../common/Layout";
 import useStore from "../store/useStore";
+import "../style/result.css";
+
 export default function Result() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const { teamName, setTeamName } = useStore();
+  const { teamName, keywords, place } = useStore();
+
+  const [postKeywords, setPostKeyWords] = useState();
+
+  useEffect(() => {
+    const newKeywords = keywords.map((keyword) => keyword);
+    setPostKeyWords(newKeywords);
+  }, [keywords]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,13 +26,15 @@ export default function Result() {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${process.env.REACT_APP_GPT_API_KEY}`,
-              // "OpenAI-Organization": "org-joUIKhObOcdR6tsnZc9CpsRA",
-              // "OpenAI-Project": "proj_DbERCYDaMi9gbzSjxHzrCKIF", // 프로젝트 ID
             },
             body: JSON.stringify({
-              model: "gpt-4o-mini",
+              model: "gpt-4-turbo",
               messages: [
-                { role: "user", content: "등산을 할 수 있는 여행지 추천해줘" },
+                {
+                  role: "user",
+                  content: `여행지는 ${place}쪽이고 ${postKeywords}키워드는 day일 다녀올 예정이야  여행지를 1개만 추천해줄래 ? 나는 split 사용해서 인덱스 별로 사용자들에게 보여줄거야 그러니까 다른 접두어 빼고 여행지이름/1일차코스/2일차코스 식으로 설명해줘 / ~ / 안에는 1일 코스가 있어야돼
+`,
+                },
               ],
               temperature: 0.5,
               max_tokens: 200,
@@ -45,8 +55,8 @@ export default function Result() {
       }
     };
 
-    // fetchData();
-  }, []); // 컴포넌트가 마운트될 때만 실행
+    postKeywords && fetchData();
+  }, [postKeywords]); // 컴포넌트가 마운트될 때만 실행
 
   // if (loading) {
   //   return <p>로딩 중...</p>;
@@ -55,14 +65,61 @@ export default function Result() {
   // if (error) {
   //   return <p>오류: {error}</p>;
   // }
-  const message =
-    "등산을 즐길 수 있는 여행지는 여러 곳이 있습니다. 아래는 한국과 해외에서 추천할 만한 등산지입니다.\n\n### 한국\n1. **한라산 (제주도)**: 제주도의 상징적인 산으로, 정상에서의 경치가 일품입니다. 다양한 코스가 있어 난이도에 따라 선택할 수 있습니다.\n2. **설악산 (강원도)**: 아름다운 경치와 다양한 등산 코스로 유명합니다. 특히 가을 단풍 시즌에 많은 사람들이 찾습니다.\n3. **지리산 (전라북도, 경상남도)**: 한국에서 가장 높은 산 중 하나로, 다양한 트레킹 코스가 있어 여러 날 동안의 도보 여행이 가능합니다.\n4. **북한산 (서울)**: 서울 근처에 위치해 있어 접근성이 좋고, 다양한 난이도의 코스가 있습니다. 서울의 전경을 감상할 수 있는";
-
+  console.log(keywords);
   return (
     <div>
-      <h1>결과</h1>
+      <div className="topWrapper">
+        <div className="teamNameWrapper">
+          <p className="teamName">'{teamName}' </p>는
+        </div>
+        <div className="keywordWrapper">
+          {keywords.length > 0 ? (
+            keywords.map((keyword) => (
+              <span
+                key={keyword}
+                style={{
+                  padding: "10px 20px",
+                  cursor: "pointer",
 
-      {/* <p>{result.choices[0].message.content}</p>{" "} */}
+                  backgroundColor: "#b3dca9",
+                  borderRadius: "5px",
+                }}
+              >
+                {keyword}
+              </span>
+            ))
+          ) : (
+            <></>
+          )}
+          을 주제로
+        </div>
+        <div style={{ display: "flex" }}>
+          <p className="teamName">{place}</p>
+          으로 갑니다.
+        </div>
+      </div>
+      <div className="resultWrppaer">
+        <p className="title">
+          {result && result.choices[0].message.content.split("/")[0]}
+        </p>
+        <div className="reasonWrapper">
+          {result &&
+            result.choices[0].message.content
+              .split("/")
+              .slice(1)
+              .map((v, index) => (
+                <div className="dayWrapper">
+                  <p className="day" key={`day_${index}`}>
+                    {index + 1} 일차
+                  </p>
+                  <p className="course" key={`content_${index}`}>
+                    {v}
+                  </p>
+                </div>
+              ))}
+        </div>
+      </div>
+
       {/* API 응답에서 콘텐츠 표시 */}
     </div>
   );
