@@ -1,8 +1,3 @@
-// export default function Keyword  ()  {
-//     return(
-       
-//     )
-// }
 
 import React, { useEffect, useState } from 'react';
 import { FaSyncAlt } from 'react-icons/fa';
@@ -57,23 +52,23 @@ const KeywordSelectionPage = () => {
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
       <h2>팀명과 키워드를 선택하세요</h2>
       
-      <label>
-        팀명:
+      <div style={{ marginTop: '20px', width: '94%', maxWidth: '410px' }}>
+        <h3>팀명:</h3>
         <input
           type="text"
           value={teamName}
           onChange={(e) => setTeamName(e.target.value)}
           placeholder="팀명을 입력하세요"
-          style={{ marginLeft: '10px', padding: '5px', width: '100%' }}
+          style={{ width: '100%', padding: '10px', borderRadius: '5px' }}
         />
-      </label>
+      </div>
 
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: '20px', width: '100%', maxWidth: '410px' }}>
         <h3>여행 일정 선택:</h3>
         <select
           value={day}
           onChange={(e) => setDay(e.target.value)}
-          style={{ width: '100%', padding: '10px', borderRadius: '5px', marginTop: '10px' }}
+          style={{ width: '100%', padding: '10px', borderRadius: '5px' }}
         >
           <option value="">날짜를 선택하세요</option>
           <option value="1">당일치기</option>
@@ -172,6 +167,7 @@ const KeywordSelectionPage = () => {
 };
 
 export default KeywordSelectionPage;
+
 
 
 
