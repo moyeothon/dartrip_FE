@@ -85,7 +85,7 @@ export default function Result() {
   const imageStyle = {
     position: "absolute",
     bottom: "120px", // 하단에서 120px
-    right: "20px", // 우측에서 20px
+    left: "50px", // 우측에서 20px
     opacity: 0.7, // 슬며시 보이게 하기 위해 투명도 조정
     width: "300px", // 이미지 크기 조정 (필요에 따라 조정)
     height: "auto", // 비율 유지

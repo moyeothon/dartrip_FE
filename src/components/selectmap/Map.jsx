@@ -60,7 +60,7 @@ export default function Map() {
       setIntervalSpeed((prevSpeed) => {
         if (prevSpeed < 200) return prevSpeed + 10;
         if (prevSpeed < 500) return prevSpeed + 20;
-        return prevSpeed + 30;
+        return prevSpeed + 50;
       });
     }, intervalSpeed);
 
